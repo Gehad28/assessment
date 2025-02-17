@@ -22,16 +22,19 @@ def filter_transactions():
         customer_id = int(filters['customer_id'])
         transactions = aggregator.filter_by_customer(customer_id)
         total_amount = aggregator.aggregate_total_revenue(transactions)
-        return json.dumps({ 'transactions': transactions, 'val': {'total_amount': total_amount} })
+        if total_amount:
+            return json.dumps({ 'transactions': transactions, 'val': {'total_amount': total_amount} })
     elif group_by == 'item_id':
         item_id = int(filters['item_id'])
         transactions = aggregator.filter_by_item(item_id)
         quantity = aggregator.aggregate_total_item(transactions)
-        return json.dumps({ 'transactions': transactions, 'val': {'quantity': quantity} })
+        if quantity:
+            return json.dumps({ 'transactions': transactions, 'val': {'quantity': quantity} })
     elif group_by == 'date_range':
         start = filters['date_range']['start_date']
         end = filters['date_range']['end_date']
         transactions = aggregator.filter_by_date(start, end)
         total_amount = aggregator.aggregate_total_revenue(transactions)
-        return json.dumps({ 'transactions': transactions, 'val': {'total_amount': total_amount} })
+        if total_amount:
+            return json.dumps({ 'transactions': transactions, 'val': {'total_amount': total_amount} })
     return json.dumps({ 'message': 'Not Found' })

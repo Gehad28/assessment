@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+body {
+  min-height: 100vh;
+  align-content: center;
+}
+
 body div {
   display: flex;
   flex-direction: column;
@@ -64,4 +69,12 @@ span {
 
 .date-range {
   flex-direction: row;
+}
+
+button {
+  background-color: transparent;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid black;
+  cursor: pointer;
 }

@@ -9,6 +9,7 @@ function App() {
   const [item_id, setItemID] = useState(0);
   const [start_date, setStartDate] = useState(new Date());
   const [end_date, setEndDate] = useState(new Date());
+  const [message, setMessgae] = useState('');
 
   const fetchData = async () => {
     const response = await fetch("http://127.0.0.1:5000/");
@@ -63,8 +64,13 @@ function App() {
       body: JSON.stringify(body)
     });
     const fetchedData = await response.json();
-    setData(fetchedData.transactions);
-    setVal(fetchedData.val);
+    if (fetchedData.transactions) {  
+      setData(fetchedData.transactions);
+      setVal(fetchedData.val);
+      setMessgae("");
+    } else {
+      setMessgae("Enter valid data");
+    }
   }
 
   const handleRemoveFilter = () => {
@@ -94,6 +100,8 @@ function App() {
         <button onClick={handleFilterBtn}>Filter</button>
         <button onClick={handleRemoveFilter}>Remove Filter</button>
       </div>
+
+      {message && <p>{message}</p>}
 
       <ul className="transactions">
         <li className="head">
