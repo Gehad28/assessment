@@ -28,10 +28,13 @@ ul li {
   margin-bottom: 1rem;
 }
 
+ul li:not(:last-child):not(.items_list li) {
+  border-bottom: 1px solid gray;
+}
+
 .head {
   background-color: wheat;
   font-weight: bold;
-  grid-column: span 5; 
 }
 
 .items-head {
@@ -49,7 +52,6 @@ ul li {
 .items_list li {
   display: grid;
   grid-template-columns: repeat(4, 1fr); 
-  gap: 2.5rem;
 }
 
 span {

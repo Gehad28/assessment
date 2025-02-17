@@ -3,7 +3,7 @@ import "./App.css";
 function App() {
   // use data to display the fetched transactions
   const [data, setData] = useState([]);
-  const [val, setVal] = useState(0);
+  const [val, setVal] = useState({});
   const [selectedFilter, setSelectedFilter] = useState('customer_id');
   const [customer_id, setCustomerID] = useState(0);
   const [item_id, setItemID] = useState(0);
@@ -67,6 +67,11 @@ function App() {
     setVal(fetchedData.val);
   }
 
+  const handleRemoveFilter = () => {
+    fetchData();
+    setVal({});
+  }
+
   return (
     <div>
       <h1>Welcome to UR-Store Assessment</h1>
@@ -87,6 +92,7 @@ function App() {
         </div>
         }
         <button onClick={handleFilterBtn}>Filter</button>
+        <button onClick={handleRemoveFilter}>Remove Filter</button>
       </div>
 
       <ul className="transactions">
@@ -121,18 +127,21 @@ function App() {
             <span>{transaction.total_amount}</span>
           </li>
         ))}
-        <li className="head">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span className="items-head">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span>{val.quantity}</span>
-          </span>
-          <span>{val.total_amount}</span>
-        </li>
+          {
+            (val.quantity || val.total_amount) && 
+              <li className="head">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span className="items-head">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span>{val.quantity}</span>
+                </span>
+                <span>{val.total_amount}</span>
+              </li>
+          }
       </ul>
 
     </div>
