@@ -79,6 +79,7 @@ class TransactionAggregator:
         Return: sum of total amount across the list
         """
         
+        transactions = sorted(transactions, key=lambda x: x['total_amount'], reverse=True)
         return TransactionAggregator.agg(transactions, 'total_amount')
     
     @staticmethod
@@ -89,5 +90,6 @@ class TransactionAggregator:
         `transactions` -- list to aggregate on
         Return: quantity of the items
         """
-        
+
+        transactions = sorted(transactions, key=lambda x: x['items'][0]['quantity'], reverse=True)
         return reduce(lambda acc, curr: acc + sum(item['quantity'] for item in curr['items']), transactions, 0)
