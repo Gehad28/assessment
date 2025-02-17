@@ -81,7 +81,6 @@ function App() {
   return (
     <div>
       <h1>Welcome to UR-Store Assessment</h1>
-      {/* implement the ui here */}
       <div className="filter">
         <label htmlFor="filter">Filter By</label>
         <select name="filter" value={selectedFilter} onChange={handleFilterChange}>
